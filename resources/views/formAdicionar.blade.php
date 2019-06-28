@@ -19,6 +19,9 @@
               <div class="col-md-6 mb-3 mb-md-0">
                 <label class="text-black" for="autor">Nome do autor</label>
                 <input type="text" id="autor" class="form-control rounded-0" name="autor" placeholder="Autor">
+                @error('autor')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
               </div>
               <div class="col-md-6">
                 <label class="text-black" for="sobrenome">Sobrenome</label>
@@ -26,12 +29,21 @@
               </div>
             </div>
 
-            <div class="row form-group">
+            <div class="form-group">
+                <label for="categoria">Categoria</label>
+                <select id="categoria" class="form-control" name="categoria_id">
+                    <option value="">Selecione</option>
 
-              <div class="col-md-12">
-                <label class="text-black" for="email">Email</label>
-                <input type="email" id="email" class="form-control rounded-0">
-              </div>
+                    @foreach ($categorias as $categoria)
+
+                        <option value="{{$categoria->id}}"> {{$categoria->nome}} </option>
+
+                    @endforeach
+                </select>
+
+                @error('categoria_id')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
             </div>
 
             <!--<div class="row form-group">
@@ -46,7 +58,10 @@
               <div class="col-md-12">
                 <label class="text-black" for="texto">Descreva sua ideia</label>
                 <textarea name="texto" id="texto" cols="30" rows="7" class="form-control rounded-0" placeholder="Escreva aqui sua ideia ;)"></textarea>
-              </div>
+                @error('texto')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+                </div>
             </div>
 
             <div class="row form-group">

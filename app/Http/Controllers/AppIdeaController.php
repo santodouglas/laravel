@@ -6,12 +6,18 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 use App\idea;
+//importar o modelo categoria
+use App\Categoria;
+
+//Importando a classe de Validação
+use App\Http\Requests\AppIdea;
 
 class AppIdeaController extends Controller
 {
     public function index()
     {
-        $dados = DB::select('SELECT * FROM ideas');
+        //$dados = DB::select('SELECT * FROM ideas');
+        $dados = idea::all();
         return view('index')->with('ideas',$dados);
 
     }
@@ -19,14 +25,15 @@ class AppIdeaController extends Controller
     //formulário para adicionar
     public function formAdicionar()
     {
-        return view('formAdicionar');
+        $categorias = Categoria::all();
+        return view('formAdicionar')->with('categorias', $categorias);
     }
 
-    public function adicionar(Request $request)
+    public function adicionar(AppIdea $request)
     {
-        $autor = $request->input('autor');
+        //$autor = $request->input('autor');
 
-        $texto = $request->input('texto');
+       // $texto = $request->input('texto');
 
         idea::create($request->input());
         return redirect()->action('AppIdeaController@index');

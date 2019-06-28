@@ -18,6 +18,12 @@ class Ideas extends Migration
             $table->string('autor', 100);
             $table->text('texto');
             $table->timestamps();
+            $table->unsignedBigInteger('categoria_id');
+
+            //Adicionando a chave estrangeira
+            $table->foreign('categoria_id')
+            ->references('id')->on('categorias')
+            ->onDelete('cascade');
         });
     }
 
